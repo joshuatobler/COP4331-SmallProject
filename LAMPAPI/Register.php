@@ -2,6 +2,8 @@
 
     $inData = getRequestInfo();
 
+    $firstname = "";
+    $lastname = "";
     $username = "";
     $password = "";
 
@@ -12,10 +14,12 @@
     }
     else
     {
-        $sql = "CREATE USER '" . $inData["username"] . "' IDENTIFIED BY '" . $inData["password"] "'";
+        $sql = "CREATE USER '" $inData["firstname"] "' '" . $inData["lastname"] "' '" . $inData["username"] . "' IDENTIFIED BY '" . $inData["password"] "'";
         $result = $conn->query($sql);
         if($result->num_rows > 0){
             $row = $result->fetch_assoc();
+            $firstname = $row["firstname"];
+            $lastname = $row["lastname"];
             $username = $row["username"];
             $password = $row["password"];
             returnWithInfo($username, $password);
