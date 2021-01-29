@@ -14,18 +14,10 @@
     }
     else
     {
-        $sql = "CREATE USER '" $inData["firstname"] "' '" . $inData["lastname"] "' '" . $inData["username"] . "' IDENTIFIED BY '" . $inData["password"] "'";
-        $result = $conn->query($sql);
-        if($result->num_rows > 0){
-            $row = $result->fetch_assoc();
-            $firstname = $row["firstname"];
-            $lastname = $row["lastname"];
-            $username = $row["username"];
-            $password = $row["password"];
-            returnWithInfo($username, $password);
-        }
-        else{
-            returnWithError("Was not able to register account");
+        $sql = "insert into Users (firstname, lastname, username, password) VALUES 
+            (" . $firstname . ", '" . $lastname . "', '" . $username . "', '" . $password . "')";
+        if($result = $conn->query($sql) != TRUE){
+            returnWithError($conn->error);
         }
         $conn->close();
     }
@@ -44,12 +36,6 @@
     function returnWithError($err)
     {
         $retValue = '{"username":"", "password":"","error":"' . $err . '"}';
-        sendResultInfoAsJson($retValue);
-    }
-
-    function returnWithInfo($username, $password)
-    {
-        $retValue = '{"username":"' . $username . '", "password":"' . $password . '", "error":""}';
         sendResultInfoAsJson($retValue);
     }
     
