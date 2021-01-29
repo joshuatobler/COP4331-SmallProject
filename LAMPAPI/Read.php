@@ -1,12 +1,11 @@
 <?php
 
     $inData = getRequestInfo();
-
-    $username = "";
-    $password = "";
     
     $fistname = "";
     $lastname = "";
+    $email = "";
+    $phone = "";
 
     $conn = new mysqli("localhost", "admin", "admin", "COP4331");
     if($conn->connection_error)
@@ -20,15 +19,11 @@
         $result = $conn->query($sql);
         if($result->num_rows > 0)
         {
-            while($row = $result->fetch_assoc())
-            {
-                if($searchCount > 0)
-                {
-                    $searchResults .= ",";
-                }
-                $searchCount++;
-                $searchResults .= '"' . $row["firstname"] . '"';
-            }
+            $row = $result->fetch_assoc();
+            $firstname = $row["firstname"];
+            $lastname = $row["lastname"];
+            $email = $row["email"];
+            $phone = $row["phone"];
         }
         else
         {
@@ -58,7 +53,8 @@
 
     function returnWithInfo($searchResults)
     {
-        $retValue = '{"results":[' . $searchResults . '],"error":""';
+        $retValue = '{"firstname":'" . $firstname . "', "lastname":'" . $lastname . "', 
+            "email":'" . $email . "',"phone":'" . $phone . "' "error":""}';
         sendResultInfoAsJson($retValue);
     }
 
