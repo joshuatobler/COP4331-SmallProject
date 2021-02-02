@@ -72,7 +72,7 @@ function register()
 		xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 		try
 		{
-			xhr.send(jsonPayLoad);
+			xhr.send(jsonPayload);
 			
 			var jsonObject = JSON.parse(xhr.responseText);
 			
