@@ -29,7 +29,7 @@ function register()
 			{
 				if (this.readyState == 4 && this.status == 200)
 				{
-					window.location.href = "index.html";
+					window.location.href = "contacts.html";
 				}
 			};
 			xhr.send(jsonPayload);
@@ -160,7 +160,7 @@ function createContact()
 		{
 			if (this.readyState == 4 && this.status == 200)
 			{
-				window.location.href = "contacts.html";
+				window.location.href = "add.html";
 			}
 		};
 
