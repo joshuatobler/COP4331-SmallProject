@@ -23,24 +23,20 @@ function register()
 	
 		console.log(jsonPayload);
 		var xhr = new XMLHttpRequest();
-		xhr.open("POST", url, true);
+		xhr.open("POST", url, false);
 		xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 		try
 		{
-			xhr.onreadystatechange = function()
-			{
-				if (this.readyState == 4 && this.status == 200)
-				{
-					window.location.href = "contacts.html";
-				}
-			};
-			xhr.send(jsonPayload);
+			xhr.send(jsonPayLoad);
+			
+			var jsonObject = JSON.parse(xhr.responseText);
+			
+			window.location.href = "index.html";
 		}
 		catch(err)
 		{
 			document.getElementById("registerResult").innerHTML = err.message;
 		}
-	
 	}
 }	
 
@@ -61,7 +57,7 @@ function login()
 
 	console.log(jsonPayload);
 	var xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
+	xhr.open("POST", url, false);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 	try
 	{
