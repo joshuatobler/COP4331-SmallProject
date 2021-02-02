@@ -15,8 +15,10 @@ function register()
 		var hash = md5( password );
 		
 		//document.getElementById("loginResult").innerHTML = "";
-	
-		var jsonPayload = '{"firstName" : "' + first + '", "lastName" : "' + last + '", "login" : "' + login + '", "password" : "' + hash + '"}';
+
+		// FIXME: later
+		var jsonPayload = '{"login" : "' + login + '", "password" : "' + hash + '"}';
+		// var jsonPayload = '{"firstName" : "' + first + '", "lastName" : "' + last + '", "login" : "' + login + '", "password" : "' + hash + '"}';
 		var url = urlBase + '/Register.' + extension;
 	
 		console.log(jsonPayload);
@@ -79,7 +81,7 @@ function login()
 
 		saveCookie();
 	
-		window.location.href = "contact.html";
+		window.location.href = "contacts.html";
 	}
 	catch(err)
 	{
@@ -160,7 +162,7 @@ function createContact()
 		{
 			if (this.readyState == 4 && this.status == 200)
 			{
-				window.location.href = "add.html";
+				window.location.href = "contacts.html";
 			}
 		};
 
