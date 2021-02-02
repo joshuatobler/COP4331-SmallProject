@@ -79,7 +79,7 @@ function login()
 
 		saveCookie();
 	
-		window.location.href = "index.html";
+		window.location.href = "contact.html";
 	}
 	catch(err)
 	{
