@@ -23,8 +23,11 @@
 			<div class="row">
 				<div class="col">
 					<!-- Text field for contact name -->
-					<p style="text-align: left; color: #ffc964;">Name:</p>
-					<input type="text" class="form-control" placeholder="Enter name" aria-label="Name" aria-describedby="basic-addon1">
+					<p style="text-align: left; color: #ffc964;">First Name:</p>
+					<input type="text" class="form-control" placeholder="John" aria-label="Name" aria-describedby="basic-addon1">
+					<br>
+					<p style="text-align: left; color: #ffc964;">Last Name:</p>
+					<input type="text" class="form-control" placeholder="Doe" aria-label="Name" aria-describedby="basic-addon1">
 					<br>
 					<!-- Text field for contact phone number -->
 					<p style="text-align: left; color: #ffc964;">Phone Number:</p>
@@ -41,8 +44,9 @@
 				</div>
 				<div class="col-2">
 					<!-- Buttons to Add Contact or Cancel -->
-					<button type="button" class="btn btn-outline-warning">Add</button>
+					<button type="button" onclick="createContact();" class="btn btn-outline-warning">Add</button>
 					<button type="button" class="btn btn-outline-warning">Cancel</button>
+					<span id="contactAddResult"></span>
 				</div>
 				<div class="col">
 				</div>
