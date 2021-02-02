@@ -62,10 +62,8 @@ function register()
 		var hash = md5( password );
 		
 		document.getElementById("registerResult").innerHTML = "";
-
-		// FIXME: later
-		var jsonPayload = '{"login" : "' + login + '", "password" : "' + hash + '"}';
-		// var jsonPayload = '{"firstName" : "' + first + '", "lastName" : "' + last + '", "login" : "' + login + '", "password" : "' + hash + '"}';
+		
+		var jsonPayload = '{"firstName" : "' + first + '", "lastName" : "' + last + '", "login" : "' + login + '", "password" : "' + hash + '"}';
 		var url = urlBase + '/Register.' + extension;
 	
 		console.log(jsonPayload);
