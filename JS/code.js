@@ -59,6 +59,7 @@ function login()
 	var jsonPayload = '{"login" : "' + login + '", "password" : "' + hash + '"}';
 	var url = urlBase + '/Login.' + extension;
 
+	console.log(jsonPayload);
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", url, false);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
