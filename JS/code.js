@@ -5,41 +5,6 @@ var userId = 0;
 var firstName = "";
 var lastName = "";
 
-function register()
-{
-	{
-		var login = document.getElementById("registerEmail").value;
-		var password = document.getElementById("registerPassword").value;
-		var first = document.getElementById("registerFirst").value;
-		var last = document.getElementById("registerLast").value;
-		var hash = md5( password );
-		
-		//document.getElementById("loginResult").innerHTML = "";
-
-		// FIXME: later
-		var jsonPayload = '{"login" : "' + login + '", "password" : "' + hash + '"}';
-		// var jsonPayload = '{"firstName" : "' + first + '", "lastName" : "' + last + '", "login" : "' + login + '", "password" : "' + hash + '"}';
-		var url = urlBase + '/Register.' + extension;
-	
-		console.log(jsonPayload);
-		var xhr = new XMLHttpRequest();
-		xhr.open("POST", url, false);
-		xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-		try
-		{
-			xhr.send(jsonPayLoad);
-			
-			var jsonObject = JSON.parse(xhr.responseText);
-			
-			window.location.href = "index.html";
-		}
-		catch(err)
-		{
-			document.getElementById("registerResult").innerHTML = err.message;
-		}
-	}
-}	
-
 function login()
 {
 	userId = 0;
@@ -86,6 +51,41 @@ function login()
 	}
 
 }
+
+function register()
+{
+	{
+		var login = document.getElementById("registerEmail").value;
+		var password = document.getElementById("registerPassword").value;
+		var first = document.getElementById("registerFirst").value;
+		var last = document.getElementById("registerLast").value;
+		var hash = md5( password );
+		
+		//document.getElementById("loginResult").innerHTML = "";
+
+		// FIXME: later
+		var jsonPayload = '{"login" : "' + login + '", "password" : "' + hash + '"}';
+		// var jsonPayload = '{"firstName" : "' + first + '", "lastName" : "' + last + '", "login" : "' + login + '", "password" : "' + hash + '"}';
+		var url = urlBase + '/Register.' + extension;
+	
+		console.log(jsonPayload);
+		var xhr = new XMLHttpRequest();
+		xhr.open("POST", url, false);
+		xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+		try
+		{
+			xhr.send(jsonPayLoad);
+			
+			var jsonObject = JSON.parse(xhr.responseText);
+			
+			window.location.href = "index.html";
+		}
+		catch(err)
+		{
+			document.getElementById("registerResult").innerHTML = err.message;
+		}
+	}
+}	
 
 function saveCookie()
 {
