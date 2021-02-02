@@ -61,7 +61,7 @@ function register()
 		var last = document.getElementById("registerLast").value;
 		var hash = md5( password );
 		
-		document.getElementById("loginResult").innerHTML = "";
+		document.getElementById("registerResult").innerHTML = "";
 
 		// FIXME: later
 		var jsonPayload = '{"login" : "' + login + '", "password" : "' + hash + '"}';
