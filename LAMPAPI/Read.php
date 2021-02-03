@@ -2,7 +2,7 @@
 
     $inData = getRequestInfo();
     
-    $fistname = "";
+    $firstname = "";
     $lastname = "";
     $email = "";
     $phone = "";
