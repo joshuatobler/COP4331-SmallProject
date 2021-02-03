@@ -15,7 +15,7 @@
     else
     {
         $sql = "insert into Users (firstname, lastname, username, password) VALUES 
-            ("$firstname", " $lastname . ", " $username ", " $password ")";
+            ('" . $firstname . "', '" . $lastname . "', '" . $username . "', '" . $password . "')";
         if($result = $conn->query($sql) != TRUE){
             returnWithError($conn->error);
         }
