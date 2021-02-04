@@ -3,7 +3,7 @@
 	$inData = getRequestInfo();
 	
 	$id = 0;
-	$username = "";
+	$email = "";
 	$password = "";
 
 	$conn = new mysqli("localhost", "admin", "admin", "COP4331");
@@ -13,16 +13,16 @@
 	} 
 	else
 	{
-		$sql = "SELECT ID,username,password FROM user where Login='" . $inData["username"] . "' and Password='" . $inData["password"] . "'";
+		$sql = "SELECT ID,email,password FROM user where Login='" . $inData["email"] . "' and Password='" . $inData["password"] . "'";
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0)
 		{
 			$row = $result->fetch_assoc();
-			$username = $row["username"];
+			$email = $row["email"];
 			$password = $row["password"];
 			$id = $row["ID"];
 			
-			returnWithInfo($username, $password, $id );
+			returnWithInfo($email, $password, $id );
 		}
 		else
 		{
@@ -44,13 +44,13 @@
 	
 	function returnWithError( $err )
 	{
-		$retValue = '{"id":0,"username":"","password":"","error":"' . $err . '"}';
+		$retValue = '{"id":0,"email":"","password":"","error":"' . $err . '"}';
 		sendResultInfoAsJson( $retValue );
 	}
 	
 	function returnWithInfo( $username, $password, $id )
 	{
-		$retValue = '{"id":' . $id . ',"username":"' . $username . '","password":"' . $password . '","error":""}';
+		$retValue = '{"id":' . $id . ',"email":"' . $email . '","password":"' . $password . '","error":""}';
 		sendResultInfoAsJson( $retValue );
 	}
 	
