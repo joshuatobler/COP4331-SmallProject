@@ -32,7 +32,25 @@ img {
     font-weight: bold;
 }
 
+.searchBtn {
+    border: none;
+    outline: none;
+    height: 38px;
+    width: 38px;
+    background-color: #F2C97B;
+    color: white;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
 .loginBtn:hover {
+    transition: 1s;
+    background: #FFB223;
+    border: 1px solid;
+    color:white;
+}
+
+.searchBtn:hover {
     transition: 1s;
     background: #FFB223;
     border: 1px solid;
