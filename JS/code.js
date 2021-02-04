@@ -169,6 +169,16 @@ function createContact()
 	}
 }
 
+function cancel()
+{
+	window.location.href = "contacts.html";
+}
+
+function newContact()
+{
+	window.location.href = "add.html";
+}
+
 // Could potentially use to search for contacts
 // function searchUser()
 // {
