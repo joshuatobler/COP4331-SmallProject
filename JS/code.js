@@ -63,7 +63,7 @@ function register()
 		
 		document.getElementById("registerResult").innerHTML = "";
 		
-		var jsonPayload = '{"firstName" : "' + first + '", "lastName" : "' + last + '", "login" : "' + login + '", "password" : "' + hash + '"}';
+		var jsonPayload = '{"login" : "' + login + '", "password" : "' + hash + '", "firstName" : "' + first + '", "lastName" : "' + last + '"}';
 		var url = urlBase + '/Register.' + extension;
 	
 		console.log(jsonPayload);
