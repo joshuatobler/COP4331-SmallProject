@@ -4,9 +4,8 @@
 
     $firstname = "";
     $lastname = "";
-    $username = "";
-    $password = "";
     $email = "";
+    $password = "";
 
     $conn = new mysqli("localhost", "admin", "admin", "COP4331");
     if($conn->connect_error)
@@ -15,8 +14,8 @@
     }
     else
     {
-        $sql = "insert into user (username, password, firstname, lastname, email) VALUES 
-            ('" . $username . "', '" . $password . "', '" . $firstname . "', '" . $lastname . "', '" . $email ."')";
+        $sql = "insert into user (password, firstname, lastname, email) VALUES 
+            ('" . $password . "', '" . $firstname . "', '" . $lastname . "', '" . $email ."')";
         if($result = $conn->query($sql) != TRUE){
             returnWithError($conn->error);
         }
@@ -36,7 +35,7 @@
 
     function returnWithError($err)
     {
-        $retValue = '{"username":"", "password":"", "firstname":"", "lastname":"", "email":"","error":"' . $err . '"}';
+        $retValue = '{"password":"", "firstname":"", "lastname":"", "email":"","error":"' . $err . '"}';
         sendResultInfoAsJson($retValue);
     }
     
