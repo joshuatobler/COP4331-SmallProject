@@ -14,7 +14,7 @@
     }
     else
     {
-        $sql = "insert into user (firstname, lastname, email, phone) VALUES
+        $sql = "insert into contacts (firstname, lastname, email, phone) VALUES
             ('" . $firstname . "', '" . $lastname . "', '" . $email . "', '" . $phone . "')"; //line 17 is going to change based on how the database is updated
         if($result = $conn->query($sql) != TRUE){
             returnWithError($conn->error);
