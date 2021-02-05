@@ -40,7 +40,7 @@
         sendResultInfoAsJson($retValue);
     }
 
-    function returnWithInfo()
+    function returnWithInfo() //added function for successful response
     {
         $retValue = '{"info":"Success"}';
         sendResultInfoAsJson( $retValue );
