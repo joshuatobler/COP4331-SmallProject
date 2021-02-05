@@ -19,6 +19,7 @@
         if($result = $conn->query($sql) != TRUE){
             returnWithError($conn->error);
         }
+        returnWithInfo(); //checks to see if it ended up working
         $conn->close();
     }
 
@@ -37,6 +38,12 @@
     {
         $retValue = '{"password":"", "firstname":"", "lastname":"", "email":"","error":"' . $err . '"}';
         sendResultInfoAsJson($retValue);
+    }
+
+    function returnWithInfo()
+    {
+        $retValue = '{"info":"Success"}';
+        sendResultInfoAsJson( $retValue );
     }
     
 ?>
