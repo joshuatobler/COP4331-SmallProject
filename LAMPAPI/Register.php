@@ -14,8 +14,8 @@
     }
     else
     {
-        $sql = "INSERT INTO user (password, firstname, lastname, email) VALUES
-            ('" . $password . "', '" . $firstname . "', '" . $lastname . "', '" . $email ."')"; // changed insert into to INSERT INTO on 17
+        $sql = "insert into user (password, firstname, lastname, email) VALUES
+            ('" . $password . "', '" . $firstname . "', '" . $lastname . "', '" . $email ."')";
         if($result = $conn->query($sql) != TRUE){
             returnWithError($conn->error);
         }
