@@ -17,7 +17,7 @@ function login()
 	
 	document.getElementById("loginResult").innerHTML = "";
 
-	var jsonPayload = '{"login" : "' + login + '", "password" : "' + hash + '"}';
+	var jsonPayload = '{"email" : "' + login + '", "password" : "' + hash + '"}';
 	var url = urlBase + '/Login.' + extension;
 
 	console.log(jsonPayload);
@@ -63,7 +63,7 @@ function register()
 		
 		document.getElementById("registerResult").innerHTML = "";
 		
-		var jsonPayload = '{"password" : "' + hash + '", "firstName" : "' + first + '", "lastName" : "' + last + '", "email" : "' + login + '"}';
+		var jsonPayload = '{"password" : "' + hash + '", "firstname" : "' + first + '", "lastname" : "' + last + '", "email" : "' + login + '"}';
 		var url = urlBase + '/Register.' + extension;
 	
 		console.log(jsonPayload);
