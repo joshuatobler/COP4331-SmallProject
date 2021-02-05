@@ -14,12 +14,12 @@
     }
     else
     {
-        $sql = "INSERT INTO user (password, firstname, lastname, email) VALUES 
-            ('" . $password . "', '" . $firstname . "', '" . $lastname . "', '" . $email ."')";
+        $sql = "INSERT INTO user (password, firstname, lastname, email) VALUES
+            ('" . $password . "', '" . $firstname . "', '" . $lastname . "', '" . $email ."')"; // changed insert into to INSERT INTO on 17
         if($result = $conn->query($sql) != TRUE){
             returnWithError($conn->error);
         }
-        returnWithInfo(); //checks to see if it ended up working
+        returnWithInfo(); // checks to see if it ended up working
         $conn->close();
     }
 
@@ -40,7 +40,7 @@
         sendResultInfoAsJson($retValue);
     }
 
-    function returnWithInfo() //added function for successful response
+    function returnWithInfo() // added function for successful response
     {
         $retValue = '{"info":"Success"}';
         sendResultInfoAsJson( $retValue );
