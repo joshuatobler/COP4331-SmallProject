@@ -10,11 +10,11 @@ function login()
 	userId = 0;
 	firstName = "";
 	lastName = "";
-	
+
 	var login = document.getElementById("loginName").value;
 	var password = document.getElementById("loginPassword").value;
 	var hash = md5( password );
-	
+
 	document.getElementById("loginResult").innerHTML = "";
 
 	var jsonPayload = '{"email" : "' + login + '", "password" : "' + hash + '"}';
@@ -27,22 +27,22 @@ function login()
 	try
 	{
 		xhr.send(jsonPayload);
-		
+
 		var jsonObject = JSON.parse( xhr.responseText );
-		
+
 		userId = jsonObject.id;
-		
+
 		if( userId < 1 )
 		{
 			document.getElementById("loginResult").innerHTML = "User/Password combination incorrect";
 			return;
 		}
-		
+
 		firstName = jsonObject.firstName;
 		lastName = jsonObject.lastName;
 
 		saveCookie();
-	
+
 		window.location.href = "contacts.html";
 	}
 	catch(err)
@@ -60,12 +60,12 @@ function register()
 		var first = document.getElementById("registerFirst").value;
 		var last = document.getElementById("registerLast").value;
 		var hash = md5( password );
-		
+
 		document.getElementById("registerResult").innerHTML = "";
-		
+
 		var jsonPayload = '{"password" : "' + hash + '", "firstname" : "' + first + '", "lastname" : "' + last + '", "email" : "' + login + '"}';
 		var url = urlBase + '/Register.' + extension;
-	
+
 		console.log(jsonPayload);
 		var xhr = new XMLHttpRequest();
 		xhr.open("POST", url, false);
@@ -73,9 +73,9 @@ function register()
 		try
 		{
 			xhr.send(jsonPayload);
-			
+
 			var jsonObject = JSON.parse(xhr.responseText);
-			
+
 			window.location.href = "index.html";
 		}
 		catch(err)
@@ -83,13 +83,13 @@ function register()
 			document.getElementById("registerResult").innerHTML = err.message;
 		}
 	}
-}	
+}
 
 function saveCookie()
 {
 	var minutes = 20;
 	var date = new Date();
-	date.setTime(date.getTime()+(minutes*60*1000));	
+	date.setTime(date.getTime()+(minutes*60*1000));
 	document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userId=" + userId + ";expires=" + date.toGMTString();
 }
 
@@ -98,7 +98,7 @@ function readCookie()
 	userId = -1;
 	var data = document.cookie;
 	var splits = data.split(",");
-	for(var i = 0; i < splits.length; i++) 
+	for(var i = 0; i < splits.length; i++)
 	{
 		var thisOne = splits[i].trim();
 		var tokens = thisOne.split("=");
@@ -115,7 +115,7 @@ function readCookie()
 			userId = parseInt( tokens[1].trim() );
 		}
 	}
-	
+
 	if( userId < 0 )
 	{
 		window.location.href = "index.html";
@@ -135,19 +135,19 @@ function Logout()
 	window.location.href = "index.html";
 }
 
-function createContact()
+function create()
 {
-	var first = document.getElementById("createFirst");
-	var last = document.getElementById("createLast");
-	var phone = document.getElementById("createPhone");
-	var address = document.getElementById("createAddress");
+	var first = document.getElementById("createFirst").value;
+	var last = document.getElementById("createLast").value;
+	var phone = document.getElementById("createPhone").value;
+	var email = document.getElementById("createEmail").value;
 
 	document.getElementById("contactAddResult").innerHTML = "";
 
-	var jsonPayload = '{"first" : "' + first + '", "last" : "' + last + '", "phone" : "' + phone + '", "address" : "' + address + '"}';
+	var jsonPayload = '{"first" : "' + first + '", "last" : "' + last + '", "phone" : "' + phone + '", "email" : "' + email + '"}';
+	var url = urlBase + '/Create.' + extension;
 
-	var url = urlBase + '/Add.' + extension;
-
+	console.log(jsonPayload);
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
@@ -184,24 +184,24 @@ function newContact()
 // {
 // 	var srch = document.getElementById("searchText").value;
 // 	document.getElementById("colorSearchResult").innerHTML = "";
-	
+
 // 	var colorList = "";
-	
+
 // 	var jsonPayload = '{"search" : "' + srch + '","userId" : ' + userId + '}';
 // 	var url = urlBase + '/SearchColors.' + extension;
-	
+
 // 	var xhr = new XMLHttpRequest();
 // 	xhr.open("POST", url, true);
 // 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 // 	try
 // 	{
-// 		xhr.onreadystatechange = function() 
+// 		xhr.onreadystatechange = function()
 // 		{
-// 			if (this.readyState == 4 && this.status == 200) 
+// 			if (this.readyState == 4 && this.status == 200)
 // 			{
 // 				document.getElementById("colorSearchResult").innerHTML = "Color(s) has been retrieved";
 // 				var jsonObject = JSON.parse( xhr.responseText );
-				
+
 // 				for( var i=0; i<jsonObject.results.length; i++ )
 // 				{
 // 					colorList += jsonObject.results[i];
@@ -210,7 +210,7 @@ function newContact()
 // 						colorList += "<br />\r\n";
 // 					}
 // 				}
-				
+
 // 				document.getElementsByTagName("p")[0].innerHTML = colorList;
 // 			}
 // 		};
@@ -220,5 +220,5 @@ function newContact()
 // 	{
 // 		document.getElementById("colorSearchResult").innerHTML = err.message;
 // 	}
-	
+
 // }
