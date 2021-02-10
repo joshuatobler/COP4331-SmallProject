@@ -12,16 +12,11 @@
     }
     else
     {
-        if($result = $conn->query(delete("Contacts")) != true)
+        $sql = "DELETE FROM Contacts WHERE firstname = '" . $inData["firstname"] . "' AND lastname = '" . $inData["lastname"]"'";
+        if($result = $conn->query($sql) != true)
         {
             returnWithError("Delete was not successfull");
         }
-    }
-
-    function delete($tablename)
-    {
-        $sql = "DELETE FROM '" . $tablename . "' WHERE firstname = 
-        '" . $inData["firstname"] . "' AND lastname = '" . $inData["lastname"]"'";
     }
 
     function getRequestInfo()
