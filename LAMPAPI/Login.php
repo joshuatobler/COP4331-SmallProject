@@ -13,16 +13,16 @@
 	} 
 	else
 	{
-		$sql = "SELECT id,email,password FROM user WHERE email='" . $email . "' and Password='" . $password . "'";
+		$sql = "SELECT * FROM user WHERE email='" . $email . "' and password='" . $password . "'";
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0)
 		{
 			$row = $result->fetch_assoc();
-			$email = $row["email"];
-			$password = $row["password"];
-			$id = $row["ID"];
+			$firstname = $row["firstname"];
+			$lastname = $row["lastname"];
+			$id = $row["id"];
 			
-			returnWithInfo($email, $password, $id );
+			returnWithInfo($firstname, $lastname, $id );
 		}
 		else
 		{
@@ -44,13 +44,13 @@
 	
 	function returnWithError( $err )
 	{
-		$retValue = '{"id":0,"email":"","password":"","error":"' . $err . '"}';
+		$retValue = '{"id":0,"firstname":"","lastname":"","error":"' . $err . '"}';
 		sendResultInfoAsJson( $retValue );
 	}
 	
-	function returnWithInfo( $username, $password, $id )
+	function returnWithInfo( $firstname, $lastname, $id )
 	{
-		$retValue = '{"id":' . $id . ',"email":"' . $email . '","password":"' . $password . '","error":""}';
+		$retValue = '{"id":' . $id . ',"firstname":"' . $firstname . '","lastname":"' . $lastname . '","error":""}';
 		sendResultInfoAsJson( $retValue );
 	}
 	
