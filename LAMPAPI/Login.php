@@ -2,6 +2,7 @@
 
 	$inData = getRequestInfo();
 	
+	$id = $inData["id"];
 	$email = $inData["email"];
 	$password = $inData["password"];
 
@@ -12,7 +13,7 @@
 	} 
 	else
 	{
-		$sql = "SELECT email,password FROM user WHERE Login='" . $inData["email"] . "' and Password='" . $inData["password"] . "'";
+		$sql = "SELECT id,email,password FROM user WHERE Login='" . $email . "' and Password='" . $password . "'";
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0)
 		{
