@@ -13,7 +13,7 @@
 	} 
 	else
 	{
-		$sql = "SELECT id,email,password FROM user WHERE Login='" . $email . "' and Password='" . $password . "'";
+		$sql = "SELECT id,email,password FROM user WHERE email='" . $email . "' and Password='" . $password . "'";
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0)
 		{
