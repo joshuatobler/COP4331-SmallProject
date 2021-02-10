@@ -54,7 +54,7 @@
     function returnWithInfo($searchResults)
     {
         $retValue = '{"firstname":'" . $firstname . "', "lastname":'" . $lastname . "', 
-            "email":'" . $email . "',"phone":'" . $phone . "' "error":""}';
+            "email":'" . $email . "', "error":""}';
         sendResultInfoAsJson($retValue);
     }
 
