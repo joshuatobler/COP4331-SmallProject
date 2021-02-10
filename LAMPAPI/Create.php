@@ -2,10 +2,9 @@
 
     $inData = getRequestInfo();
 
-    $firstname = "";
-    $lastname = "";
-    $email = "";
-    $phone = "";
+    $firstname = $inData["firstname"];
+    $lastname = $inData["lastname"];
+    $email = $inData["email"];
 
     $conn = new mysqli("localhost", "admin", "admin", "COP4331");
     if($conn->connect_error)
@@ -15,7 +14,7 @@
     else
     {
         $sql = "insert into contacts (firstname, lastname, email, phone) VALUES
-            ('" . $firstname . "', '" . $lastname . "', '" . $email . "', '" . $phone . "')"; //line 17 is going to change based on how the database is updated
+            ('" . $firstname . "', '" . $lastname . "', '" . $email . "')"; //line 17 is going to change based on how the database is updated
         if($result = $conn->query($sql) != TRUE){
             returnWithError($conn->error);
         }
