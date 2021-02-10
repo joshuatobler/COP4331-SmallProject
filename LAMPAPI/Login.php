@@ -12,7 +12,7 @@
 	} 
 	else
 	{
-		$sql = "SELECT ID,email,password FROM user WHERE Login='" . $inData["email"] . "' and Password='" . $inData["password"] . "'";
+		$sql = "SELECT email,password FROM user WHERE Login='" . $inData["email"] . "' and Password='" . $inData["password"] . "'";
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0)
 		{
