@@ -2,10 +2,10 @@
 
     $inData = getRequestInfo();
     
-    $firstname = "";
-    $lastname = "";
-    $email = "";
-    $phone = "";
+    $firstname = $inData["firstname"];
+    $lastname = $inData["lastname"];
+    $email = $inData["email"];
+    $phone = $inData["phone"];
 
     $conn = new mysqli("localhost", "admin", "admin", "COP4331");
     if($conn->connection_error)
@@ -19,11 +19,8 @@
         $result = $conn->query($sql);
         if($result->num_rows > 0)
         {
-            $row = $result->fetch_assoc();
-            $firstname = $row["firstname"];
-            $lastname = $row["lastname"];
-            $email = $row["email"];
-            $phone = $row["phone"];
+            // not sure if this is where it belongs
+            $sql = "UPDATE Contacts Set 'firstname' = '$firstname', 'lastname' = '$lastname', 'email' = '$email', 'phone' = '$phone' WHERE id = '$id'";
         }
         else
         {
@@ -31,8 +28,8 @@
         }
         $conn->close();
     }
-
-    returnWithInfo($searchResults);
+   
+    //returnWithInfo($searchResults);
 
     function getRequestInfo()
     {
