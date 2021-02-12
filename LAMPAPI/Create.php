@@ -1,35 +1,27 @@
 <?php
 
     $inData = getRequestInfo();
-    
+
     $firstname = $inData["firstname"];
     $lastname = $inData["lastname"];
     $email = $inData["email"];
-    $phone = $inData["phone"];
+    $phone = $inData["phone"]; // added phone
 
     $conn = new mysqli("localhost", "admin", "admin", "COP4331");
-    if($conn->connection_error)
+    if($conn->connect_error)
     {
-        returnWithError($conn->connection_error);
+        returnWithError($conn->connect_error);
     }
     else
     {
-        $sql = "SELECT firstname FROM Contacts WHERE firstname like '%" . $inData["firstname"] 
-            . "%' and lastname like '%" . $inData["lastname"] . "%'";
-        $result = $conn->query($sql);
-        if($result->num_rows > 0)
-        {
-            // not sure if this is where it belongs
-            $sql = "UPDATE Contacts Set 'firstname' = '$firstname', 'lastname' = '$lastname', 'email' = '$email', 'phone' = '$phone' WHERE id = '$id'";
+        $sql = "insert into contacts (firstname, lastname, email, phone) VALUES
+            ('" . $firstname . "', '" . $lastname . "', '" . $email . "', '" . $phone . "')"; // added phone
+        if($result = $conn->query($sql) != TRUE){
+            returnWithError($conn->error);
         }
-        else
-        {
-            returnWithError("No Contacts Found");
-        }
+        returnWithInfo(); //added to check for success
         $conn->close();
     }
-   
-    //returnWithInfo($searchResults);
 
     function getRequestInfo()
     {
@@ -44,15 +36,14 @@
 
     function returnWithError($err)
     {
-        $retValue = '{"firstname":"","lastname":"","error":"' . $err . '"}';
+        $retValue = '{"firstname":"", "lastname":"","error":"' . $err . '"}';
         sendResultInfoAsJson($retValue);
     }
-
-    function returnWithInfo($searchResults)
+    
+    function returnWithInfo() // added function for successful response
     {
-        $retValue = '{"firstname":'" . $firstname . "', "lastname":'" . $lastname . "', 
-            "email":'" . $email . "', "error":""}';
-        sendResultInfoAsJson($retValue);
+        $retValue = '{"info":"Success"}';
+        sendResultInfoAsJson( $retValue );
     }
 
 ?>
