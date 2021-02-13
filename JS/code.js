@@ -7,10 +7,6 @@ var lastName = "";
 
 function login()
 {
-	userId = 0;
-	firstName = "";
-	lastName = "";
-
 	var login = document.getElementById("loginName").value;
 	var password = document.getElementById("loginPassword").value;
 	var hash = md5( password );
@@ -30,7 +26,7 @@ function login()
 
 		var jsonObject = JSON.parse( xhr.responseText );
 
-		userId = jsonObject.id;
+		userId = jsonObject.message.id;
 
 		if( userId < 1 )
 		{
@@ -38,8 +34,8 @@ function login()
 			return;
 		}
 
-		firstName = jsonObject.firstName;
-		lastName = jsonObject.lastName;
+		firstName = jsonObject.message.first_name;
+		lastName = jsonObject.message.last_name;
 
 		saveCookie();
 
@@ -122,7 +118,7 @@ function readCookie()
 	}
 	else
 	{
-		document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
+		// document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
 	}
 }
 
@@ -141,6 +137,8 @@ function create()
 	var last = document.getElementById("createLast").value;
 	var phone = document.getElementById("createPhone").value;
 	var email = document.getElementById("createEmail").value;
+
+	readCookie();
 
 	document.getElementById("contactAddResult").innerHTML = "";
 
