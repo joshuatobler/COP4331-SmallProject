@@ -157,6 +157,7 @@ function create()
 		{
 			if (this.readyState == 4 && this.status == 200)
 			{
+				document.getElementById("contactAddResult").innerHTML = "Contact created successfully.";
 				window.location.href = "contacts.html";
 			}
 		};
@@ -218,4 +219,78 @@ function search()
 		document.getElementById("searchResult").innerHTML = err.message;
 	}
 
+}
+
+function read()
+{
+	// pass first, last, current user id
+	// pass names first name, last name, foreign id
+}
+
+function deleteContact()
+{
+	var first = document.getElementById("deleteFirst");
+	var last = document.getElementById("deleteLast");
+
+	document.getElementById("contactDeleteResult").innerHTML = "";
+
+	var jsonPayload = '{"first" : "' + first + '", "last" : "' + last + '", "id" : "' + userId + '"}';
+	var url = urlBase + '/Update.' + extension;
+
+	console.log(jsonPayload);
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try
+	{
+		xhr.onreadystatechange = function()
+		{
+			if (this.readyState == 4 && this.status == 200)
+			{
+				document.getElementById("contactDeleteResult").innerHTML = "Contact deleted successfully.";
+				window.location.href = "contacts.html";
+			}
+		};
+
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+		document.getElementById("contactDeleteResult").innerHTML = err.message;
+	}
+}
+
+function update()
+{
+	var first = document.getElementById("updateFirst").value;
+	var last = document.getElementById("updateLast").value;
+	var phone = document.getElementById("updatePhone").value;
+	var email = document.getElementById("updateEmail").value;
+
+	document.getElementById("contactUpdateResult").innerHTML = "";
+
+	var jsonPayload = '{"first" : "' + first + '", "last" : "' + last + '", "phone" : "' + phone + '", "email" : "' + email + '"}';
+	var url = urlBase + '/Update.' + extension;
+
+	console.log(jsonPayload);
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try
+	{
+		xhr.onreadystatechange = function()
+		{
+			if (this.readyState == 4 && this.status == 200)
+			{
+				document.getElementById("contactUpdateResult").innerHTML = "Contact updated successfully.";
+				window.location.href = "contacts.html";
+			}
+		};
+
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+		document.getElementById("contactUpdateResult").innerHTML = err.message;
+	}
 }
