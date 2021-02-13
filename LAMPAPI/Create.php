@@ -4,7 +4,7 @@ $post_data = get_json_request();
 
 $conn = new mysqli("localhost", "admin", "admin", "COP4331");
 if (!$conn->connect_error) {
-    $sql = "INSERT INTO contacts (foreignid, firstname, lastname, email, phone) VALUES
+    $sql = "insert into contacts (foreignid, firstname, lastname, email, phone) VALUES
             ('" . $post_data["id"] . "', '" . $post_data["first"] . "', '" . $post_data["last"] . "', '" . $post_data["email"] . "', '" . $post_data["phone"] . "')"; //line 17 is going to change based on how the database is updated
 
     if ($result = $conn->query($sql) !== TRUE) {
