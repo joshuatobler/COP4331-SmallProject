@@ -144,12 +144,12 @@ function create()
 
 	document.getElementById("contactAddResult").innerHTML = "";
 
-	var jsonPayload = '{"first" : "' + first + '", "last" : "' + last + '", "phone" : "' + phone + '", "email" : "' + email + '"}';
+	var jsonPayload = '{"id" : "' + userId + '", "first" : "' + first + '", "lastde" : "' + last + '", "email" : "' + email + '", "phone" : "' + phone + '"}';
 	var url = urlBase + '/Create.' + extension;
 
 	console.log(jsonPayload);
 	var xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
+	xhr.open("POST", url, false);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 	try
 	{
@@ -157,7 +157,6 @@ function create()
 		{
 			if (this.readyState == 4 && this.status == 200)
 			{
-				document.getElementById("contactAddResult").innerHTML = "Contact created successfully.";
 				window.location.href = "contacts.html";
 			}
 		};
@@ -241,7 +240,7 @@ function deleteContact()
 		{
 			if (this.readyState == 4 && this.status == 200)
 			{
-				document.getElementById("contactDeleteResult").innerHTML = "Contact deleted successfully.";
+				// document.getElementById("contactDeleteResult").innerHTML = "Contact deleted successfully.";
 				window.location.href = "contacts.html";
 			}
 		};
@@ -276,7 +275,7 @@ function update()
 		{
 			if (this.readyState == 4 && this.status == 200)
 			{
-				document.getElementById("contactUpdateResult").innerHTML = "Contact updated successfully.";
+				// document.getElementById("contactUpdateResult").innerHTML = "Contact updated successfully.";
 				window.location.href = "contacts.html";
 			}
 		};
