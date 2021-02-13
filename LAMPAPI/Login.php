@@ -1,57 +1,58 @@
 <?php
+// this doesn't actually do anything, to login cookies need to be set with session management
 
-	$inData = getRequestInfo();
-	
-	$id = 0;
-	$email = $inData["email"];
-	$password = $inData["password"];
+$post_data = get_json_request();
 
-	$conn = new mysqli("localhost", "admin", "admin", "COP4331");
-	if ($conn->connect_error) 
-	{
-		returnWithError( $conn->connect_error );
-	} 
-	else
-	{
-		$sql = "SELECT * FROM user WHERE email='" . $email . "' and password='" . $password . "'";
-		$result = $conn->query($sql);
-		if ($result->num_rows > 0)
-		{
-			$row = $result->fetch_assoc();
-			$firstname = $row["firstname"];
-			$lastname = $row["lastname"];
-			$id = $row["id"];
-			
-			returnWithInfo($firstname, $lastname, $id );
-		}
-		else
-		{
-			returnWithError($sql);
-		}
-		$conn->close();
-	}
-	
-	function getRequestInfo()
-	{
-		return json_decode(file_get_contents('php://input'), true);
-	}
+$conn = new mysqli("localhost", "admin", "admin", "COP4331");
+if (!$conn->connect_error) {
+    $sql = "SELECT * FROM user WHERE email='" . $post_data["email"] . "' and password='" . $post_data["password"] . "'";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        send_json_response([
+            'first_name' => $row["firstname"],
+            'last_name' => $row["lastname"],
+            'id' => $row["id"]
+        ]);
+    } else {
+        send_json_response($sql, true, 500);
+    }
+    $conn->close();
+} else {
+    send_json_response($conn->connect_error, true, 500);
+}
 
-	function sendResultInfoAsJson( $obj )
-	{
-		header('Content-type: application/json');
-		echo $obj;
-	}
-	
-	function returnWithError( $err )
-	{
-		$retValue = '{"id":0,"firstname":"","lastname":"","error":"' . $err . '"}';
-		sendResultInfoAsJson( $retValue );
-	}
-	
-	function returnWithInfo( $firstname, $lastname, $id )
-	{
-		$retValue = '{"id":' . $id . ',"firstname":"' . $firstname . '","lastname":"' . $lastname . '","error":""}';
-		sendResultInfoAsJson( $retValue );
-	}
-	
-?>
+function get_json_request()
+{
+    $json_str = file_get_contents('php://input');
+    if ($json_str !== false) {
+        $json_arr = json_decode($json_str, true);
+        if ($json_arr !== null) {
+            return $json_arr;
+        }
+    }
+
+    send_json_response('Input not in JSON format', true, 400);
+    exit();
+}
+
+function send_json_response($res, $err = false, $res_code = null)
+{
+    header('Content-type: application/json');
+    if ($res_code === null) {
+        http_response_code($err ? 500 : 200);
+    } else {
+        http_response_code($res_code);
+    }
+    $json_response = json_encode([
+        'status' => $err ? 'failure' : 'success',
+        'message' => $res
+    ]);
+
+    if ($json_response !== false) {
+        echo $json_response;
+    } else {
+        http_response_code(500);
+        exit();
+    }
+}
