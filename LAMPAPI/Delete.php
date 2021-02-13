@@ -1,39 +1,49 @@
 <?php
 
-    $inData = getRequestInfo();
+$post_data = get_json_request();
 
-    $firstname = "";
-    $lastname = "";
-
-    $conn = new mysqli("localhost", "admin", "admin", "COP4331");
-    if($conn->connection_error)
-    {
-        returnWithError($conn->connection_error);
+$conn = new mysqli("localhost", "admin", "admin", "COP4331");
+if (!$conn->connection_error) {
+    $sql = "DELETE firstname FROM Contacts WHERE firstname like '%" . $post_data["firstname"]
+        . "%' and lastname like '%" . $post_data["lastname"] . "%' and foreignid like '%" . $post_data["id"] . "%'";
+    if ($result = $conn->query($sql) !== true) {
+        send_json_response("Delete was not successful", true, 500);
     }
-    else
-    {
-        $sql = "DELETE FROM Contacts WHERE firstname = '" . $inData["firstname"] . "' AND lastname = '" . $inData["lastname"]"'";
-        if($result = $conn->query($sql) != true)
-        {
-            returnWithError("Delete was not successfull");
+} else {
+    send_json_response($conn->connection_error, true, 500);
+}
+
+function get_json_request()
+{
+    $json_str = file_get_contents('php://input');
+    if ($json_str !== false) {
+        $json_arr = json_decode($json_str, true);
+        if ($json_arr !== null) {
+            return $json_arr;
         }
     }
 
-    function getRequestInfo()
-    {
-        json_decode(file_get_contents('php://input'), true);
-    }
+    send_json_response('Input not in JSON format', true, 400);
+    exit();
+}
 
-    function sendResultInfoAsJson($obj)
-    {
-        header('Content-type: application/json');
-        echo $obj;
+function send_json_response($res, $err = false, $res_code = null)
+{
+    header('Content-type: application/json');
+    if ($res_code === null) {
+        http_response_code($err ? 500 : 200);
+    } else {
+        http_response_code($res_code);
     }
+    $json_response = json_encode([
+        'status' => $err ? 'failure' : 'success',
+        'message' => $res
+    ]);
 
-    function returnWithError($err)
-    {
-        $retValue = '{"firstname":"","lastname":"","error":"' . $err . '"}';
-        sendResultInfoAsJson($retValue);
+    if ($json_response !== false) {
+        echo $json_response;
+    } else {
+        http_response_code(500);
+        exit();
     }
-
-?>
+}
