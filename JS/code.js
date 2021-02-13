@@ -229,7 +229,7 @@ function deleteContact()
 	document.getElementById("contactDeleteResult").innerHTML = "";
 
 	var jsonPayload = '{"first" : "' + first + '", "last" : "' + last + '", "id" : "' + userId + '"}';
-	var url = urlBase + '/Update.' + extension;
+	var url = urlBase + '/Delete.' + extension;
 
 	console.log(jsonPayload);
 	var xhr = new XMLHttpRequest();
