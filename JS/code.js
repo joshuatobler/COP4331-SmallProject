@@ -221,12 +221,6 @@ function search()
 
 }
 
-function read()
-{
-	// pass first, last, current user id
-	// pass names first name, last name, foreign id
-}
-
 function deleteContact()
 {
 	var first = document.getElementById("deleteFirst");
