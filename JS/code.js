@@ -144,12 +144,12 @@ function create()
 
 	document.getElementById("contactAddResult").innerHTML = "";
 
-	var jsonPayload = '{"id" : "' + userId + '", "first" : "' + first + '", "lastde" : "' + last + '", "email" : "' + email + '", "phone" : "' + phone + '"}';
+	var jsonPayload = '{"id" : "' + userId + '", "first" : "' + first + '", "last" : "' + last + '", "email" : "' + email + '", "phone" : "' + phone + '"}';
 	var url = urlBase + '/Create.' + extension;
 
 	console.log(jsonPayload);
 	var xhr = new XMLHttpRequest();
-	xhr.open("POST", url, false);
+	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 	try
 	{
