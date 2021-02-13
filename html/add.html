@@ -25,26 +25,26 @@
 					<!-- Text field for contact name -->
 					<br>
 					<p style="text-align: left; color: #ffc964;">First Name:</p>
-					<input type="text" id="createFirst" class="form-control" placeholder="John" aria-describedby="basic-addon1">
+					<input type="name" id="createFirst" placeholder="John" class="form-control my-3 p-4">
 					<br>
 					<p style="text-align: left; color: #ffc964;">Last Name:</p>
-					<input type="text" id="createLast" class="form-control" placeholder="Doe" aria-describedby="basic-addon1">
+					<input type="name" id="createLast" placeholder="Doe" class="form-control my-3 p-4">
 					<br>
 					<!-- Text field for contact phone number -->
 					<p style="text-align: left; color: #ffc964;">Phone Number:</p>
-					<input type="text" id="createPhone" class="form-control" placeholder="(xxx) xxx-xxxx" aria-describedby="basic-addon1">
+					<input type="phone" id="createPhone" placeholder="(xxx) xxx-xxxx" class="form-control my-3 p-4">
 					<br>
 					<!-- Text field for contact address -->
 					<p style="text-align: left; color: #ffc964;">Email Address:</p>
-					<input type="text" id="createEmail" class="form-control" placeholder="johndoe@realemail.com" aria-describedby="basic-addon1">
+					<input type="email" id="createEmail" placeholder="johndoe@example.com" class="form-control my-3 p-4">
 					<br><br>
 				</div>
 			</div>
 			<div class="form-row">
 				<div class="col">
 					<button type="button" onclick="create();" class="loginBtn mt-3 mb-5">Create Contact</button>
-					<span id="contactAddResult"></span>
 				</div>
+				<span id="contactAddResult"></span>
 				<div class="col">
 					<button type="button" onclick="cancel();" class="loginBtn mt-3 mb-5">Cancel</button>
 				</div>
