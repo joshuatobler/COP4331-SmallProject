@@ -177,10 +177,11 @@ function search()
 {
 	var srch = document.getElementById("searchText").value;
 	document.getElementById("searchResult").innerHTML = "";
+	var contactList = "";
 
 	readCookie();
 
-	var jsonPayload = '{"search" : "' + srch + '","userId" : ' + userId + '}';
+	var jsonPayload = '{"search" : "' + srch + '","id" : ' + userId + '}';
 	var url = urlBase + '/Read.' + extension;
 
 	var xhr = new XMLHttpRequest();
@@ -195,19 +196,79 @@ function search()
 				document.getElementById("searchResult").innerHTML = "User found";
 				var jsonObject = JSON.parse( xhr.responseText );
 
-				for( var i=0; i<jsonObject.results.length; i++ )
-				{
-					contactList += jsonObject.results[i];
-					if( i < jsonObject.results.length - 1 )
-					{
-						contactList += "<br />\r\n";
-					}
-				}
-
-				document.getElementsByTagName("p")[0].innerHTML = contactList;
+				contactList = jsonObject.searchResults;
+				displaySearch(contactList);
 			}
 		};
 		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+		document.getElementById("searchResult").innerHTML = err.message;
+	}
+}
+
+function insRow(row, row2)
+{
+    var x=document.getElementById('contactTable');
+       // deep clone the targeted row
+    var new_row = x.rows[1].cloneNode(true);
+       // get the total number of rows
+    var len = x.rows.length;
+       // set the innerHTML of the first row 
+    new_row.cells[0].innerHTML = len;
+
+       // grab the input from the first cell and update its ID and value
+    var inp1 = new_row.cells[1].getElementsByTagName('input')[0];
+    inp1.id += len;
+    inp1.value = row;
+
+       // grab the input from the first cell and update its ID and value
+    var inp2 = new_row.cells[2].getElementsByTagName('input')[0];
+    inp2.id += len;
+    inp2.value = row2;
+
+       // append the new row to the table
+    x.appendChild(new_row );
+}
+
+function displaySearch (obj)
+{
+	for (var i=0; i<obj.length; i++)
+	{
+		var result = readResult(obj[i]);
+		insRow(result[0], result[1]);
+	}
+}
+
+function readResult(id)
+{
+	var xhr = new XMLHttpRequest();
+	var table = document.getElementById("contactTable");
+	var jsonPayload = '{"id" : "' + id + '"}';
+	var url = urlBase + '/Readone.' + extension;
+	var fullName = [];
+
+	var firstName = "";
+	var lastName = "";
+
+	console.log(jsonPayload);
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, false);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try
+	{
+		xhr.send(jsonPayload);
+
+		var jsonObject = JSON.parse( xhr.responseText );
+
+		firstName = jsonObject.message.first_name;
+		lastName = jsonObject.message.last_name;
+
+		fullName.appendChild(firstName);
+		fullName.appendChild(lastName);
+
+		return fullName;
 	}
 	catch(err)
 	{
