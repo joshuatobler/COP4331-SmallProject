@@ -191,6 +191,7 @@ function search()
 	var jsonPayload = '{"search" : "' + srch + '","id" : ' + userId + '}';
 	var url = urlBase + '/Read.' + extension;
 
+	console.log(jsonPayload);
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
@@ -198,6 +199,7 @@ function search()
 	{
 		xhr.onreadystatechange = function()
 		{
+			xhr.send(jsonPayload);
 			if (this.readyState == 4 && this.status == 200)
 			{
 				document.getElementById("searchResult").innerHTML = "User found";
