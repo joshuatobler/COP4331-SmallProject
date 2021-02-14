@@ -194,10 +194,9 @@ function search()
 	try
 	{
 			xhr.send(jsonPayload);
-			document.getElementById("searchResult").innerHTML = "User found";
-			var jsonObject = JSON.parse( xhr.responseText );
+			var jsonObject = JSON.parse(xhr.responseText);
 
-			contactList = jsonObject.searchResults;
+			contactList = jsonObject.message.searchResults;
 			displaySearch(contactList);
 	}
 	catch(err)
