@@ -193,18 +193,12 @@ function search()
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 	try
 	{
-		xhr.onreadystatechange = function()
-		{
 			xhr.send(jsonPayload);
-			if (this.readyState == 4 && this.status == 200)
-			{
-				document.getElementById("searchResult").innerHTML = "User found";
-				var jsonObject = JSON.parse( xhr.responseText );
+			document.getElementById("searchResult").innerHTML = "User found";
+			var jsonObject = JSON.parse( xhr.responseText );
 
-				contactList = jsonObject.searchResults;
-				displaySearch(contactList);
-			}
-		};
+			contactList = jsonObject.searchResults;
+			displaySearch(contactList);
 	}
 	catch(err)
 	{
