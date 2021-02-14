@@ -4,7 +4,7 @@ $post_data = get_json_request();
 
 $conn = new mysqli("localhost", "admin", "admin", "COP4331");
 if (!$conn->connection_error) {
-    $sql = "DELETE FROM contacts WHERE id='" . $post_data["firstname"] . "'";
+    $sql = "DELETE FROM contacts WHERE id='" . $post_data["id"] . "'";
     if ($result = $conn->query($sql) !== true) {
         send_json_response("Delete was not successful", true, 500);
     }
