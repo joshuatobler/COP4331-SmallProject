@@ -5,8 +5,8 @@ $searchResults = [];
 
 $conn = new mysqli("localhost", "admin", "admin", "COP4331");
 if (!$conn->connection_error) {
-    $sql = "SELECT * FROM contacts WHERE firstname like '%" . $post_data["search"]
-        . "%' and lastname like '%" . $post_data["search"] . "%' and foreignid='" . $post_data["id"] . "'";
+    $sql = "SELECT id FROM contacts WHERE firstname like '%" . $post_data["search"]
+        . "%' or lastname like '%" . $post_data["search"] . "%' and foreignid='" . $post_data["id"] . "'";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         $searchResults = $result->fetch_assoc();
