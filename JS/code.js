@@ -205,7 +205,6 @@ function search()
 				displaySearch(contactList);
 			}
 		};
-		xhr.send(jsonPayload);
 	}
 	catch(err)
 	{
