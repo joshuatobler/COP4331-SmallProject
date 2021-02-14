@@ -10,6 +10,7 @@ if (!$conn->connection_error) {
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         $searchResults = $result->fetch_assoc();
+        send_json_response($searchResults);
     } else {
         send_json_response("No Contacts Found", true, 200);
     }
@@ -17,8 +18,6 @@ if (!$conn->connection_error) {
 } else {
     send_json_response($conn->connect_error, true, 500);
 }
-
-send_json_response($searchResults);
 
 function get_json_request()
 {
