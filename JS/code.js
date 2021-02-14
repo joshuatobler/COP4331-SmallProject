@@ -178,6 +178,8 @@ function search()
 	var srch = document.getElementById("searchText").value;
 	document.getElementById("searchResult").innerHTML = "";
 
+	readCookie();
+
 	var jsonPayload = '{"search" : "' + srch + '","userId" : ' + userId + '}';
 	var url = urlBase + '/Read.' + extension;
 
@@ -211,13 +213,14 @@ function search()
 	{
 		document.getElementById("searchResult").innerHTML = err.message;
 	}
-
 }
 
 function deleteContact()
 {
 	var first = document.getElementById("deleteFirst");
 	var last = document.getElementById("deleteLast");
+
+	readCookie();
 
 	document.getElementById("contactDeleteResult").innerHTML = "";
 
@@ -253,6 +256,8 @@ function update()
 	var last = document.getElementById("updateLast").value;
 	var phone = document.getElementById("updatePhone").value;
 	var email = document.getElementById("updateEmail").value;
+
+	readCookie();
 
 	document.getElementById("contactUpdateResult").innerHTML = "";
 
