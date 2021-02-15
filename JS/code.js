@@ -244,8 +244,6 @@ function readResult(id)
 	var table = document.getElementById("contactTable");
 	var jsonPayload = '{"id" : "' + id + '"}';
 	var url = urlBase + '/Readone.' + extension;
-	var fullName = [];
-
 	var firstName = "";
 	var lastName = "";
 
@@ -262,8 +260,7 @@ function readResult(id)
 		firstName = jsonObject.message.first_name;
 		lastName = jsonObject.message.last_name;
 
-		fullName.push(firstName);
-		fullName.push(lastName);
+		var fullName = [firstName, lastName];
 		
 		console.log(fullName);
 
