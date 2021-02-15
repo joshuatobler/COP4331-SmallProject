@@ -262,8 +262,8 @@ function readResult(id)
 		firstName = jsonObject.message.first_name;
 		lastName = jsonObject.message.last_name;
 
-		fullName.appendChild(firstName);
-		fullName.appendChild(lastName);
+		fullName.push(firstName);
+		fullName.push(lastName);
 
 		return fullName;
 	}
