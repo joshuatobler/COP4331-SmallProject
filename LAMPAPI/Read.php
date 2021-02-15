@@ -9,7 +9,9 @@ if (!$conn->connection_error) {
         . "%' or lastname like '" . $post_data["search"] . "%' and foreignid='" . $post_data["id"] . "'";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
-        $searchResults = $result->fetch_assoc();
+        while($row =  $result->fetch_assoc()){
+            $searchResults[] = $row;
+        }
         send_json_response($searchResults);
     } else {
         send_json_response("No Contacts Found", true, 200);
