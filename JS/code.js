@@ -229,7 +229,7 @@ function insRow(row, row2)
     x.appendChild(new_row );
 }
 
-function displaySearch (obj)
+function displaySearch(obj)
 {
 	for (var i=0; i<obj.length; i++)
 	{
