@@ -197,12 +197,12 @@ function search()
 			var jsonResponse = JSON.parse(xhr.responseText);
 
 			contactList = jsonResponse.message;
-			displaySearch(contactList);
 	}
 	catch(err)
 	{
 		document.getElementById("searchResult").innerHTML = err.message;
 	}
+	displaySearch(contactList);
 }
 
 function insRow(row, row2)
@@ -234,14 +234,12 @@ function displaySearch (obj)
 	for (var i=0; i<obj.length; i++)
 	{
 		var result = readResult(obj[i]);
-		insRow(result.firstname, result.lastname);
+		insRow(result[0], result[1]);
 	}
 }
 
 function readResult(id)
 {
-	var xhr = new XMLHttpRequest();
-	var table = document.getElementById("contactTable");
 	var jsonPayload = '{"id" : "' + id + '"}';
 	var url = urlBase + '/Readone.' + extension;
 	var firstName = "";
@@ -259,21 +257,15 @@ function readResult(id)
 
 		firstName = jsonObject.message.first_name;
 		lastName = jsonObject.message.last_name;
-
-		var fullName = {
-			'firstname':firstName
-			'lastname':lastName
-		};
-		
-		console.log(fullName.firstname);
-		console.log(fullName.lastName);
-
-		return fullName;
 	}
 	catch(err)
 	{
 		document.getElementById("searchResult").innerHTML = err.message;
 	}
+
+	let fullName = [firstName, lastName];
+
+	return fullName;
 }
 
 function deleteContact()
