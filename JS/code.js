@@ -208,7 +208,7 @@ function search()
 	{
 		document.getElementById("searchResult").innerHTML = err.message;
 	}
-	if (contactList.status != "failure") { 
+	if (contactList != "No Contacts Found") { 
 		displaySearch(contactList);
 	}
 }
