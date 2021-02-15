@@ -208,9 +208,9 @@ function search()
 function insRow(row, row2)
 {
   	var x = document.getElementById('contactTable');
- 	var row = x.insertRow(0);
-  	var cell1 = row.insertCell(0);
- 	var cell2 = row.insertCell(1);
+ 	var row1 = x.insertRow(-1);
+  	var cell1 = row1.insertCell(0);
+ 	var cell2 = row1.insertCell(1);
   	cell1.innerHTML = row;
   	cell2.innerHTML = row2;
 }
