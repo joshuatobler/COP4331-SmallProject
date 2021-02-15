@@ -208,7 +208,9 @@ function search()
 	{
 		document.getElementById("searchResult").innerHTML = err.message;
 	}
-	displaySearch(contactList);
+	if (contactList.status != "failure") { 
+		displaySearch(contactList);
+	}
 }
 
 function insRow(row, row2, id)
