@@ -213,6 +213,36 @@ function search()
 	}
 }
 
+function readAll()
+{
+	delTable();
+	document.getElementById("searchResult").innerHTML = "";
+	var contactList = [];
+
+	readCookie();
+
+	var jsonPayload = '{"id" : ' + userId + '}';
+	var url = urlBase + '/ReadAll.' + extension;
+
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, false);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try
+	{
+			xhr.send(jsonPayload);
+			var jsonResponse = JSON.parse(xhr.responseText);
+
+			contactList = jsonResponse.message;
+	}
+	catch(err)
+	{
+		document.getElementById("searchResult").innerHTML = err.message;
+	}
+	if (contactList != "No Contacts Found") { 
+		displaySearch(contactList);
+	}
+}
+
 function insRow(row, row2, id)
 {
   	var x = document.getElementById('contactTable');
