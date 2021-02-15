@@ -234,7 +234,7 @@ function displaySearch (obj)
 	for (var i=0; i<obj.length; i++)
 	{
 		var result = readResult(obj[i]);
-		insRow(result[0], result[1]);
+		insRow(result.firstname, result.lastname);
 	}
 }
 
@@ -260,10 +260,13 @@ function readResult(id)
 		firstName = jsonObject.message.first_name;
 		lastName = jsonObject.message.last_name;
 
-		var fullName = [firstName, lastName];
+		var fullName = {
+			'firstname':firstName
+			'lastname':lastName
+		};
 		
-		console.log(fullName[0]);
-		console.log(fullName[1]);
+		console.log(fullName.firstname);
+		console.log(fullName.lastName);
 
 		return fullName;
 	}
