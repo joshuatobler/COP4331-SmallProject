@@ -151,11 +151,15 @@ function create()
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 	try
 	{
+		xhr.onreadystatechange = function()
+		{
+			if (this.readyState == 4 && this.status == 200)
+			{
+				window.location.href = "contacts.html";
+			}
+		};
+
 		xhr.send(jsonPayload);
-
-		var jsonObject = JSON.parse(xhr.responseText);
-
-		window.location.href = "contacts.html";
 	}
 	catch(err)
 	{
@@ -177,7 +181,7 @@ function search()
 {
 	var srch = document.getElementById("searchText").value;
 	document.getElementById("searchResult").innerHTML = "";
-	var contactList = "";
+	var contactList = [];
 
 	readCookie();
 
@@ -185,27 +189,20 @@ function search()
 	var url = urlBase + '/Read.' + extension;
 
 	var xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
+	xhr.open("POST", url, false);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 	try
 	{
-		xhr.onreadystatechange = function()
-		{
-			if (this.readyState == 4 && this.status == 200)
-			{
-				document.getElementById("searchResult").innerHTML = "User found";
-				var jsonObject = JSON.parse( xhr.responseText );
+			xhr.send(jsonPayload);
+			var jsonResponse = JSON.parse(xhr.responseText);
 
-				contactList = jsonObject.searchResults;
-				displaySearch(contactList);
-			}
-		};
-		xhr.send(jsonPayload);
+			contactList = jsonResponse.message;
 	}
 	catch(err)
 	{
 		document.getElementById("searchResult").innerHTML = err.message;
 	}
+	displaySearch(contactList);
 }
 
 function insRow(row, row2)
@@ -232,23 +229,19 @@ function insRow(row, row2)
     x.appendChild(new_row );
 }
 
-function displaySearch (obj)
+function displaySearch(obj)
 {
 	for (var i=0; i<obj.length; i++)
 	{
-		var result = readResult(obj[i]);
+		var result = readResult(obj[i].id);
 		insRow(result[0], result[1]);
 	}
 }
 
 function readResult(id)
 {
-	var xhr = new XMLHttpRequest();
-	var table = document.getElementById("contactTable");
 	var jsonPayload = '{"id" : "' + id + '"}';
 	var url = urlBase + '/Readone.' + extension;
-	var fullName = [];
-
 	var firstName = "";
 	var lastName = "";
 
@@ -262,18 +255,16 @@ function readResult(id)
 
 		var jsonObject = JSON.parse( xhr.responseText );
 
+		// {message: {first_name: firstName, last_name: lastName}} = response;
 		firstName = jsonObject.message.first_name;
 		lastName = jsonObject.message.last_name;
-
-		fullName.appendChild(firstName);
-		fullName.appendChild(lastName);
-
-		return fullName;
 	}
 	catch(err)
 	{
 		document.getElementById("searchResult").innerHTML = err.message;
 	}
+
+	return [firstName, lastName];
 }
 
 function deleteContact()
@@ -290,7 +281,7 @@ function deleteContact()
 
 	console.log(jsonPayload);
 	var xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
+	xhr.open("POST", url, false);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 	try
 	{
@@ -327,7 +318,7 @@ function update()
 
 	console.log(jsonPayload);
 	var xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
+	xhr.open("POST", url, false);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 	try
 	{
