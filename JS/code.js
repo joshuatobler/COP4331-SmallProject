@@ -234,7 +234,7 @@ function displaySearch(obj)
 	for (var i=0; i<obj.length; i++)
 	{
 		var result = readResult(obj[i].id);
-		insRow(result.firstname, result.lastname);
+		insRow(result.first_name, result.last_name);
 	}
 }
 
