@@ -219,16 +219,17 @@ function insRow(row, row2, id)
 	cell3.type = "button"
 	cell3.value = "select";
 	cell3.name = id;
+	cell3.color = "gold";
 	cell3.onclick = function() {gotoUpdate(id)};
 }
 
 function gotoUpdate(id) {
 	window.location.href = "update.html";
 	var result = readResult(id);
-	var first = document.getElementById("upFirst").value = result.message.first_name;
-	var last = document.getElementById("upLast").value = result.message.last_name;
-	var phone = document.getElementById("upPhone").value = result.message.phone;
-	var email = document.getElementById("upEmail").value = result.message.email;
+	var first = document.getElementById("upFirst").placeholder = result.message.first_name;
+	var last = document.getElementById("upLast").placeholder = result.message.last_name;
+	var phone = document.getElementById("upPhone").placeholder = result.message.phone;
+	var email = document.getElementById("upEmail").placeholder = result.message.email;
 }
 function delTable()
 {	
