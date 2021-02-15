@@ -319,21 +319,21 @@ function deleteContact()
 
 function update()
 {
-	var first = document.getElementById("updateFirst").value;
-	var last = document.getElementById("updateLast").value;
-	var phone = document.getElementById("updatePhone").value;
-	var email = document.getElementById("updateEmail").value;
+	var first = document.getElementById("upFirst").value;
+	var last = document.getElementById("upLast").value;
+	var phone = document.getElementById("upPhone").value;
+	var email = document.getElementById("upEmail").value;
 
 	readCookie();
 
-	document.getElementById("contactUpdateResult").innerHTML = "";
+	document.getElementById("upResult").innerHTML = "";
 
-	var jsonPayload = '{"first" : "' + first + '", "last" : "' + last + '", "phone" : "' + phone + '", "email" : "' + email + '"}';
+	var jsonPayload = '{"id" : "' + contactid + '", "first" : "' + first + '", "last" : "' + last + '", "phone" : "' + phone + '", "email" : "' + email + '"}';
 	var url = urlBase + '/Update.' + extension;
 
 	console.log(jsonPayload);
 	var xhr = new XMLHttpRequest();
-	xhr.open("POST", url, false);
+	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 	try
 	{
@@ -341,7 +341,6 @@ function update()
 		{
 			if (this.readyState == 4 && this.status == 200)
 			{
-				// document.getElementById("contactUpdateResult").innerHTML = "Contact updated successfully.";
 				window.location.href = "contacts.html";
 			}
 		};
@@ -350,6 +349,6 @@ function update()
 	}
 	catch(err)
 	{
-		document.getElementById("contactUpdateResult").innerHTML = err.message;
+		document.getElementById("upResult").innerHTML = err.message;
 	}
 }
