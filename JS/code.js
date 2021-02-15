@@ -228,7 +228,7 @@ function gotoUpdate(id) {
 	var result = readResult(id);
 	document.getElementById("upFirst").value = result.first_name;
 	document.getElementById("upLast").value = result.last_name;
-	document.getElementById("upPhone").value = result.phone
+	document.getElementById("upPhone").value = result.phone;
 	document.getElementById("upEmail").value = result.email;
 }
 function delTable()
