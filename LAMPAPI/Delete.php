@@ -6,8 +6,10 @@ $conn = new mysqli("localhost", "admin", "admin", "COP4331");
 if (!$conn->connection_error) {
     $sql = "DELETE FROM contacts WHERE id='" . $post_data["id"] . "'";
     if ($result = $conn->query($sql) !== true) {
-        send_json_response("Delete was not successful", true, 500);
+        send_json_response($conn->error, true, 500);
     }
+    send_json_response('User deleted');
+    $conn->close();
 } else {
     send_json_response($conn->connection_error, true, 500);
 }
