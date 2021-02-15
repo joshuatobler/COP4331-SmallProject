@@ -262,7 +262,8 @@ function readResult(id)
 
 		var fullName = [firstName, lastName];
 		
-		console.log(fullName);
+		console.log(fullName[0]);
+		console.log(fullName[1]);
 
 		return fullName;
 	}
