@@ -2,6 +2,7 @@ var urlBase = 'http://cop4331-15.tech/LAMPAPI';
 var extension = 'php';
 
 var userId = 0;
+var contactid = 0;
 var firstName = "";
 var lastName = "";
 
@@ -86,7 +87,7 @@ function saveCookie()
 	var minutes = 20;
 	var date = new Date();
 	date.setTime(date.getTime()+(minutes*60*1000));
-	document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userId=" + userId + ";expires=" + date.toGMTString();
+	document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userId=" + userId + ",contactid=" + contactid + ";expires=" + date.toGMTString();
 }
 
 function readCookie()
@@ -109,6 +110,10 @@ function readCookie()
 		else if( tokens[0] == "userId" )
 		{
 			userId = parseInt( tokens[1].trim() );
+		}
+		else if( tokens[0] == "contactid" ) 
+		{
+			contactid = parseInt( tokens[1].trim() );
 		}
 	}
 
@@ -224,13 +229,19 @@ function insRow(row, row2, id)
 }
 
 function gotoUpdate(id) {
+	contactid = id;
+	saveCookie();
 	window.location.href = "update.html";
-	var result = readResult(id);
-	document.getElementById("upFirst").defaultValue = result.first_name;
-	document.getElementById("upLast").defaultValue = result.last_name;
-	document.getElementById("upEmail").defaultValue = result.email;
-	document.getElementById("upPhone").defaultValue = result.phone;
 }
+
+loadUpdate() {
+	var result = readResult(contactid);
+	document.getElementById("upFirst").value = result.first_name;
+	document.getElementById("upLast").value = result.last_name;
+	document.getElementById("upEmail").value = result.email;
+	document.getElementById("upPhone").value = result.phone;
+}
+
 function delTable()
 {	
 	var x = document.getElementById('contactTable');
