@@ -7,7 +7,7 @@ if (!$conn->connection_error) {
     $sql = "SELECT * FROM contacts WHERE id='" . $post_data["id"] . "'";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
-        $searchResults = $result->fetch_assoc();
+        $row = $result->fetch_assoc();
         send_json_response([
             'first_name' => $row["firstname"],
             'last_name' => $row["lastname"],
