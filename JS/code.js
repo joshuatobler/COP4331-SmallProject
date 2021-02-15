@@ -264,6 +264,8 @@ function readResult(id)
 
 		fullName.push(firstName);
 		fullName.push(lastName);
+		
+		console.log(fullName);
 
 		return fullName;
 	}
