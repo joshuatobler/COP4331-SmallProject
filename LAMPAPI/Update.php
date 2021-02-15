@@ -4,7 +4,7 @@ $post_data = get_json_request();
 
 $conn = new mysqli("localhost", "admin", "admin", "COP4331");
 if (!$conn->connect_error) {
-    $sql = "UPDATE contacts SET firstname='" . $post_data[firstname] . "' lastname='" . $post_data["lastname"] . "' phone='" . $post_data["phone"] . "' email='" . $post_data["email"] . "' WHERE id='" . $postdata["id"] . "'";
+    $sql = "UPDATE contacts SET firstname='" . $post_data[firstname] . "' lastname='" . $post_data["lastname"] . "' phone='" . $post_data["phone"] . "' email='" . $post_data["email"] . "' WHERE id='" . $post_data["id"] . "'";
     if ($result = $conn->query($sql) !== true) {
         send_json_response($conn->error, true, 500);
     }
