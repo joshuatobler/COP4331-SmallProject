@@ -250,10 +250,13 @@ function delTable()
 
 function displaySearch(obj)
 {
+	readCookie();
 	for (var i=0; i<obj.length; i++)
 	{
 		var result = readResult(obj[i].id);
-		insRow(result.first_name, result.last_name, obj[i].id);
+		if (result.foreignid == userId) {
+			insRow(result.first_name, result.last_name, obj[i].id);
+		}
 	}
 }
 
