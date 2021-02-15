@@ -194,9 +194,10 @@ function search()
 	try
 	{
 			xhr.send(jsonPayload);
-			var jsonObject = xhr.response.json;
+			var jsonResponse = JSON.parse(xhr.responseText);
+			console.log(jsonResponse);
 
-			contactList = jsonObject.message.searchResults;
+			contactList = jsonResponse.message.searchResults;
 			displaySearch(contactList);
 	}
 	catch(err)
