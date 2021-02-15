@@ -206,16 +206,30 @@ function search()
 	displaySearch(contactList);
 }
 
-function insRow(row, row2)
+function insRow(row, row2, id)
 {
   	var x = document.getElementById('contactTable');
  	var row1 = x.insertRow(-1);
   	var cell1 = row1.insertCell(0);
  	var cell2 = row1.insertCell(1);
+	var cell3 = row1.insertCell(2)
   	cell1.innerHTML = row;
   	cell2.innerHTML = row2;
+	
+	cell3.type = "button"
+	cell3.value = "select";
+	cell3.name = id;
+	cell3.onclick = gotoUpdate(id);
 }
 
+function gotoUpdate(id) {
+	window.location.href = "update.html";
+	var result = readResult(id);
+	var first = document.getElementById("upFirst").value = result.message.first_name;
+	var last = document.getElementById("upLast").value = result.message.last_name;
+	var phone = document.getElementById("upPhone").value = result.message.phone;
+	var email = document.getElementById("upEmail").value = result.message.email;
+}
 function delTable()
 {	
 	var x = document.getElementById('contactTable');
@@ -229,7 +243,7 @@ function displaySearch(obj)
 	for (var i=0; i<obj.length; i++)
 	{
 		var result = readResult(obj[i].id);
-		insRow(result.first_name, result.last_name);
+		insRow(result.first_name, result.last_name, obj[i].id);
 	}
 }
 
