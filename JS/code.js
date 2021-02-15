@@ -219,19 +219,10 @@ function insRow(row, row2, id)
  	var row1 = x.insertRow(-1);
   	var cell1 = row1.insertCell(0);
  	var cell2 = row1.insertCell(1);
-	var cell3 = row1.insertCell(2)
   	cell1.innerHTML = row;
   	cell2.innerHTML = row2;
 	cell1.addEventListener('click', function() {gotoUpdate(id)});
 	cell2.addEventListener('click', function() {gotoUpdate(id)});
-
-	cell3.type = "button"
-	cell3.value = "select";
-	cell3.name = id;
-	cell3.color = "gold";
-	cell3.style.width = '100%';
-	cell3.style.height = '100$';
-	cell3.onclick = function() {gotoUpdate(id)};
 }
 
 function gotoUpdate(id) {
