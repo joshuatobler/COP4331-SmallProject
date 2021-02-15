@@ -226,10 +226,10 @@ function insRow(row, row2, id)
 function gotoUpdate(id) {
 	window.location.href = "update.html";
 	var result = readResult(id);
-	var first = document.getElementById("upFirst").placeholder = result.message.first_name;
-	var last = document.getElementById("upLast").placeholder = result.message.last_name;
-	var phone = document.getElementById("upPhone").placeholder = result.message.phone;
-	var email = document.getElementById("upEmail").placeholder = result.message.email;
+	document.getElementById("upFirst")[0].placeholder = result.message.first_name;
+	document.getElementById("upLast")[0].placeholder = result.message.last_name;
+	document.getElementById("upPhone")[0].placeholder = result.message.phone;
+	document.getElementById("upEmail")[0].placeholder = result.message.email;
 }
 function delTable()
 {	
