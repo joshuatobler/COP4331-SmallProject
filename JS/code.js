@@ -111,7 +111,7 @@ function readCookie()
 		{
 			userId = parseInt( tokens[1].trim() );
 		}
-		else if( tokens[0] == "contactid" ) 
+		else if( tokens[0] == "contactid" )
 		{
 			contactid = parseInt( tokens[1].trim() );
 		}
@@ -220,7 +220,7 @@ function insRow(row, row2, id)
 	var cell3 = row1.insertCell(2)
   	cell1.innerHTML = row;
   	cell2.innerHTML = row2;
-	
+
 	cell3.type = "button"
 	cell3.value = "select";
 	cell3.name = id;
@@ -234,7 +234,8 @@ function gotoUpdate(id) {
 	window.location.href = "update.html";
 }
 
-loadUpdate() {
+function loadUpdate() {
+	readCookie();
 	var result = readResult(contactid);
 	document.getElementById("upFirst").value = result.first_name;
 	document.getElementById("upLast").value = result.last_name;
@@ -243,7 +244,7 @@ loadUpdate() {
 }
 
 function delTable()
-{	
+{
 	var x = document.getElementById('contactTable');
 	while (x.rows.length > 1) {
 		x.deleteRow(1);
