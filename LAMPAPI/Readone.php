@@ -23,8 +23,6 @@ if (!$conn->connection_error) {
     send_json_response($conn->connect_error, true, 500);
 }
 
-send_json_response($searchResults);
-
 function get_json_request()
 {
     $json_str = file_get_contents('php://input');
