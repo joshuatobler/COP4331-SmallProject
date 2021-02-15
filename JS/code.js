@@ -179,6 +179,7 @@ function newContact()
 
 function search()
 {
+	delTable();
 	var srch = document.getElementById("searchText").value;
 	document.getElementById("searchResult").innerHTML = "";
 	var contactList = [];
