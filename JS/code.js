@@ -233,7 +233,7 @@ function displaySearch(obj)
 {
 	for (var i=0; i<obj.length; i++)
 	{
-		var result = readResult(obj[i]);
+		var result = readResult(obj[i].id);
 		insRow(result[0], result[1]);
 	}
 }
@@ -242,8 +242,6 @@ function readResult(id)
 {
 	var jsonPayload = '{"id" : "' + id + '"}';
 	var url = urlBase + '/Readone.' + extension;
-	var firstName = "";
-	var lastName = "";
 
 	console.log(jsonPayload);
 	var xhr = new XMLHttpRequest();
@@ -253,19 +251,17 @@ function readResult(id)
 	{
 		xhr.send(jsonPayload);
 
-		var jsonObject = JSON.parse( xhr.responseText );
+		var jsonObject = JSON.parse(xhr.responseText);
 
-		firstName = jsonObject.message.first_name;
-		lastName = jsonObject.message.last_name;
+		return [jsonObject.message.first_name, jsonObject.message.last_name];
+
+		// first = jsonObject.message.first_name;
+		// last = jsonObject.message.last_name;
 	}
 	catch(err)
 	{
 		document.getElementById("searchResult").innerHTML = err.message;
 	}
-
-	let fullName = [firstName, lastName];
-
-	return fullName;
 }
 
 function deleteContact()
