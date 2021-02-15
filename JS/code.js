@@ -285,14 +285,11 @@ function readResult(id)
 
 function deleteContact()
 {
-	var first = document.getElementById("deleteFirst");
-	var last = document.getElementById("deleteLast");
-
 	readCookie();
 
-	document.getElementById("contactDeleteResult").innerHTML = "";
+	document.getElementById("upResult").innerHTML = "";
 
-	var jsonPayload = '{"first" : "' + first + '", "last" : "' + last + '", "id" : "' + userId + '"}';
+	var jsonPayload = '{"id" : "' + contactid + '"}';
 	var url = urlBase + '/Delete.' + extension;
 
 	console.log(jsonPayload);
@@ -301,20 +298,15 @@ function deleteContact()
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 	try
 	{
-		xhr.onreadystatechange = function()
-		{
-			if (this.readyState == 4 && this.status == 200)
-			{
-				// document.getElementById("contactDeleteResult").innerHTML = "Contact deleted successfully.";
-				window.location.href = "contacts.html";
-			}
-		};
-
 		xhr.send(jsonPayload);
+
+		var jsonObject = JSON.parse(xhr.responseText);
+
+		window.location.href = "contacts.html";
 	}
 	catch(err)
 	{
-		document.getElementById("contactDeleteResult").innerHTML = err.message;
+		document.getElementById("upResult").innerHTML = err.message;
 	}
 }
 
