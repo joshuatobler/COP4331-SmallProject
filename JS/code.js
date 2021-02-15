@@ -189,13 +189,12 @@ function search()
 	var url = urlBase + '/Read.' + extension;
 
 	var xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
+	xhr.open("POST", url, false);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 	try
 	{
 			xhr.send(jsonPayload);
 			var jsonResponse = JSON.parse(xhr.responseText);
-			console.log(jsonResponse);
 
 			contactList = jsonResponse.message.searchResults;
 			displaySearch(contactList);
@@ -288,7 +287,7 @@ function deleteContact()
 
 	console.log(jsonPayload);
 	var xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
+	xhr.open("POST", url, false);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 	try
 	{
@@ -325,7 +324,7 @@ function update()
 
 	console.log(jsonPayload);
 	var xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
+	xhr.open("POST", url, false);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 	try
 	{
