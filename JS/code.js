@@ -194,7 +194,7 @@ function search()
 	try
 	{
 			xhr.send(jsonPayload);
-			var jsonObject = JSON.parse(xhr.responseText);
+			var jsonObject = xhr.response.json;
 
 			contactList = jsonObject.message.searchResults;
 			displaySearch(contactList);
