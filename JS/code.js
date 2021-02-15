@@ -207,26 +207,12 @@ function search()
 
 function insRow(row, row2)
 {
-    var x=document.getElementById('contactTable');
-       // deep clone the targeted row
-    var new_row = x.rows[1].cloneNode(true);
-       // get the total number of rows
-    var len = x.rows.length;
-       // set the innerHTML of the first row 
-    new_row.cells[0].innerHTML = len;
-
-       // grab the input from the first cell and update its ID and value
-    var inp1 = new_row.cells[1].getElementsByTagName('input')[0];
-    inp1.id += len;
-    inp1.value = row;
-
-       // grab the input from the first cell and update its ID and value
-    var inp2 = new_row.cells[2].getElementsByTagName('input')[0];
-    inp2.id += len;
-    inp2.value = row2;
-
-       // append the new row to the table
-    x.appendChild(new_row );
+  	var x=document.getElementById('contactTable');
+ 	var row = table.insertRow(0);
+  	var cell1 = row.insertCell(0);
+ 	var cell2 = row.insertCell(1);
+  	cell1.innerHTML = row;
+  	cell2.innerHTML = row2;
 }
 
 function displaySearch(obj)
