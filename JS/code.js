@@ -227,6 +227,8 @@ function insRow(row, row2, id)
 	cell3.value = "select";
 	cell3.name = id;
 	cell3.color = "gold";
+	cell3.style.width = '100%';
+	cell3.style.height = '100$';
 	cell3.onclick = function() {gotoUpdate(id)};
 }
 
