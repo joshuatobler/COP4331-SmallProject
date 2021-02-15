@@ -219,9 +219,9 @@ function insRow(row, row2)
 function delTable()
 {	
 	var x = document.getElementById('contactTable');
-	var newx = document.createElement('contactTable');
-	populate_with_new_rows(newx);
-	x.parentNode.replaceChild(newx, x);	
+	while (x.rows.length > 1) {
+		x.deleteRow(1);
+	}
 }
 
 function displaySearch(obj)
