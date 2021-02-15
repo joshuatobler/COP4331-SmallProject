@@ -219,7 +219,7 @@ function insRow(row, row2, id)
 	cell3.type = "button"
 	cell3.value = "select";
 	cell3.name = id;
-	cell3.onclick = gotoUpdate(id);
+	cell3.onclick = function() {gotoUpdate(id)};
 }
 
 function gotoUpdate(id) {
