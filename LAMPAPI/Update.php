@@ -1,58 +1,50 @@
 <?php
 
-    $inData = getRequestInfo();
-    
-    $firstname = $inData["firstname"];
-    $lastname = $inData["lastname"];
-    $email = $inData["email"];
-    $phone = $inData["phone"];
+$post_data = get_json_request();
 
-    $conn = new mysqli("localhost", "admin", "admin", "COP4331");
-    if($conn->connection_error)
-    {
-        returnWithError($conn->connection_error);
+$conn = new mysqli("localhost", "admin", "admin", "COP4331");
+if (!$conn->connect_error) {
+    $sql = "UPDATE contacts SET firstname='" . $post_data[firstname] . "' lastname='" . $post_data["lastname"] . "' phone='" . $post_data["phone"] . "' email='" . $post_data["email"] . "' WHERE id='" . $postdata["id"] . "'";
+    if ($result = $conn->query($sql) !== true) {
+        send_json_response($conn->error, true, 500);
     }
-    else
-    {
-        $sql = "SELECT firstname FROM Contacts WHERE firstname like '%" . $inData["firstname"] 
-            . "%' and lastname like '%" . $inData["lastname"] . "%'";
-        $result = $conn->query($sql);
-        if($result->num_rows > 0)
-        {
-            // not sure if this is where it belongs
-            $sql = "UPDATE Contacts Set 'firstname' = '$firstname', 'lastname' = '$lastname', 'email' = '$email', 'phone' = '$phone' WHERE id = '$id'";
+    send_json_response('User inserted successfully');
+    $conn->close();
+} else {
+    send_json_response($conn->connect_error, true, 500);
+}
+
+function get_json_request()
+{
+    $json_str = file_get_contents('php://input');
+    if ($json_str !== false) {
+        $json_arr = json_decode($json_str, true);
+        if ($json_arr !== null) {
+            return $json_arr;
         }
-        else
-        {
-            returnWithError("No Contacts Found");
-        }
-        $conn->close();
-    }
-   
-    //returnWithInfo($searchResults);
-
-    function getRequestInfo()
-    {
-        return json_decode(file_get_contents('php://input'), true);
     }
 
-    function sendResultInfoAsJson($obj)
-    {
-        header('Content-type: application/json');
-        echo $obj;
-    }
+    send_json_response('Input not in JSON format', true, 400);
+    exit();
+}
 
-    function returnWithError($err)
-    {
-        $retValue = '{"firstname":"","lastname":"","error":"' . $err . '"}';
-        sendResultInfoAsJson($retValue);
+function send_json_response($res, $err = false, $res_code = null)
+{
+    header('Content-type: application/json');
+    if ($res_code === null) {
+        http_response_code($err ? 500 : 200);
+    } else {
+        http_response_code($res_code);
     }
+    $json_response = json_encode([
+        'status' => $err ? 'failure' : 'success',
+        'message' => $res
+    ]);
 
-    function returnWithInfo($searchResults)
-    {
-        $retValue = '{"firstname":'" . $firstname . "', "lastname":'" . $lastname . "', 
-            "email":'" . $email . "', "error":""}';
-        sendResultInfoAsJson($retValue);
+    if ($json_response !== false) {
+        echo $json_response;
+    } else {
+        http_response_code(500);
+        exit();
     }
-
-?>
+}
