@@ -222,6 +222,8 @@ function insRow(row, row2, id)
 	var cell3 = row1.insertCell(2)
   	cell1.innerHTML = row;
   	cell2.innerHTML = row2;
+	cell1.addEventListener('click', gotoUpdate(id));
+	cell2.addEventListener('click', gotoUpdate(id));
 
 	cell3.type = "button"
 	cell3.value = "select";
