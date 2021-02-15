@@ -328,7 +328,7 @@ function update()
 
 	document.getElementById("upResult").innerHTML = "";
 
-	var jsonPayload = '{"id" : "' + contactid + '", "first" : "' + first + '", "last" : "' + last + '", "phone" : "' + phone + '", "email" : "' + email + '"}';
+	var jsonPayload = '{"id" : "' + contactid + '", "firstname" : "' + first + '", "lastname" : "' + last + '", "phone" : "' + phone + '", "email" : "' + email + '"}';
 	var url = urlBase + '/Update.' + extension;
 
 	console.log(jsonPayload);
@@ -341,7 +341,7 @@ function update()
 
 		var jsonObject = JSON.parse(xhr.responseText);
 
-		window.location.href = "index.html";
+		window.location.href = "contacts.html";
 	}
 	catch(err)
 	{
