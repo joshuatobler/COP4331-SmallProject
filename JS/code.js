@@ -234,7 +234,7 @@ function displaySearch(obj)
 	for (var i=0; i<obj.length; i++)
 	{
 		var result = readResult(obj[i].id);
-		insRow(result[0], result[1]);
+		insRow(result.firstname, result.lastname);
 	}
 }
 
@@ -253,10 +253,7 @@ function readResult(id)
 
 		var jsonObject = JSON.parse(xhr.responseText);
 
-		return [jsonObject.message.first_name, jsonObject.message.last_name];
-
-		// first = jsonObject.message.first_name;
-		// last = jsonObject.message.last_name;
+		return jsonObject.message;
 	}
 	catch(err)
 	{
