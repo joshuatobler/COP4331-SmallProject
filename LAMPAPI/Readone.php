@@ -13,7 +13,7 @@ if (!$conn->connection_error) {
             'last_name' => $row["lastname"],
             'email' => $row["email"],
             'phone' => $row["phone"],
-            'contactid' => $row["id"]
+            'id' => $row["id"]
         ]);
     } else {
         send_json_response("No Contacts Found", true, 200);
