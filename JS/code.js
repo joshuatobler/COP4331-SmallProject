@@ -181,7 +181,7 @@ function search()
 {
 	var srch = document.getElementById("searchText").value;
 	document.getElementById("searchResult").innerHTML = "";
-	var contactList = "";
+	var contactList = [];
 
 	readCookie();
 
